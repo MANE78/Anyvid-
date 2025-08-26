@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anyvid - تحميل الفيديوهات</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Anyvid - تحميل الفيديوهات</h1>
+        <p>قم بلصق رابط الفيديو من أي موقع لبدء التحميل</p>
+        <form id="download-form">
+            <input type="url" id="video-url" placeholder="https://..." required>
+            <button type="submit">بحث</button>
+        </form>
+        <div id="loader" class="loader" style="display: none;"></div>
+        <div id="error" class="error-message" style="display: none;"></div>
+        <div id="results" style="display: none;">
+            <h2 id="video-title"></h2>
+            <img id="video-thumbnail" src="" alt="Video thumbnail">
+            <h3>روابط التحميل المتاحة:</h3>
+            <ul id="formats-list"></ul>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
