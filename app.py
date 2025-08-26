@@ -19,10 +19,15 @@ def download():
             'noplaylist': True,
             'quiet': True,
             'no_warnings': True,
+            'extract_flat': True, # To avoid extracting too much info
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
             formats = []
+            if 'entries' in info: # It's a playlist
+                # For simplicity, just process the first video of the playlist
+                info = info['entries'][0]
+
             for f in info.get('formats', []):
                 if f.get('url'):
                     formats.append({

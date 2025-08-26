@@ -31,20 +31,27 @@ document.getElementById('download-form').addEventListener('submit', async functi
             titleEl.textContent = data.title;
             thumbnailEl.src = data.thumbnail;
 
-            data.formats.forEach(format => {
+            if (data.formats && data.formats.length > 0) {
+                data.formats.forEach(format => {
+                    const li = document.createElement('li');
+                    let formatText = `${format.ext} - ${format.resolution || format.format_note || ''}`;
+                    if (format.filesize) {
+                        formatText += ` (${(format.filesize / 1024 / 1024).toFixed(2)} MB)`;
+                    }
+                    const a = document.createElement('a');
+                    a.href = format.url;
+                    a.textContent = `تحميل بصيغة ${formatText}`;
+                    a.target = '_blank'; // Open in new tab
+                    a.download = ''; // Suggest to download
+                    li.appendChild(a);
+                    formatsList.appendChild(li);
+                });
+            } else {
                 const li = document.createElement('li');
-                let formatText = `${format.ext} - ${format.resolution || format.format_note || ''}`;
-                if (format.filesize) {
-                    formatText += ` (${(format.filesize / 1024 / 1024).toFixed(2)} MB)`;
-                }
-                const a = document.createElement('a');
-                a.href = format.url;
-                a.textContent = `تحميل بصيغة ${formatText}`;
-                a.target = '_blank'; // Open in new tab
-                a.download = ''; // Suggest to download
-                li.appendChild(a);
+                li.textContent = 'لم يتم العثور على صيغ تحميل متاحة لهذا الفيديو.';
                 formatsList.appendChild(li);
-            });
+            }
+
 
             resultsDiv.style.display = 'block';
         } else {
