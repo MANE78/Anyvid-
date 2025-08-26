@@ -1,2 +1,12 @@
 [build]
   command = "pip install -r requirements.txt"
+  # This specifies the directory where Netlify will look for serverless functions.
+  functions = "netlify/functions"
+
+# This is a redirect rule. It tells Netlify to take any request to any path on the site (`/*`)
+# and forward it to our serverless function named 'server'.
+# The status code 200 means it's a rewrite, not a redirect, so the URL in the browser doesn't change.
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200
