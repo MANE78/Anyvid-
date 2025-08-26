@@ -29,7 +29,7 @@ router.post('/download', async (req, res) => {
     res.status(200).json(videoDetails);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to fetch video information.' });
+    res.status(500).json({ error: `Failed to fetch video information: ${error.message}` });
   }
 });
 
