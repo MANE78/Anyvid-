@@ -1,6 +1,6 @@
 const express = require('express');
 const serverless = require('serverless-http');
-const ytdl = require('ytdl-core');
+const ytdl = require('@distube/ytdl-core');
 const cors = require('cors');
 
 const app = express();
