@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anyvid - تحميل الفيديوهات</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <div class="container">
         <h1>Anyvid - تحميل الفيديوهات</h1>
-        <p>قم بلصق رابط الفيديو من أي موقع لبدء التحميل</p>
+        <p>قم بلصق رابط الفيديو من يوتيوب لبدء التحميل</p>
         <form id="download-form">
-            <input type="url" id="video-url" placeholder="https://..." required>
+            <input type="url" id="video-url" placeholder="https://www.youtube.com/watch?v=..." required>
             <button type="submit">بحث</button>
         </form>
         <div id="loader" class="loader" style="display: none;"></div>
@@ -23,6 +23,6 @@
             <ul id="formats-list"></ul>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="/script.js"></script>
 </body>
 </html>

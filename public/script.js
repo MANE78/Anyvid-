@@ -17,7 +17,8 @@ document.getElementById('download-form').addEventListener('submit', async functi
     errorDiv.textContent = '';
 
     try {
-        const response = await fetch('/download', {
+        // The API endpoint is now /api/download
+        const response = await fetch('/api/download', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,15 +35,16 @@ document.getElementById('download-form').addEventListener('submit', async functi
             if (data.formats && data.formats.length > 0) {
                 data.formats.forEach(format => {
                     const li = document.createElement('li');
-                    let formatText = `${format.ext} - ${format.resolution || format.format_note || ''}`;
-                    if (format.filesize) {
-                        formatText += ` (${(format.filesize / 1024 / 1024).toFixed(2)} MB)`;
+                    // ytdl-core provides slightly different format properties
+                    let formatText = `${format.container} - ${format.qualityLabel}`;
+                    if (format.hasAudio) {
+                        formatText += ' (with audio)';
                     }
                     const a = document.createElement('a');
                     a.href = format.url;
                     a.textContent = `تحميل بصيغة ${formatText}`;
-                    a.target = '_blank'; // Open in new tab
-                    a.download = ''; // Suggest to download
+                    a.target = '_blank';
+                    a.download = '';
                     li.appendChild(a);
                     formatsList.appendChild(li);
                 });
@@ -51,7 +53,6 @@ document.getElementById('download-form').addEventListener('submit', async functi
                 li.textContent = 'لم يتم العثور على صيغ تحميل متاحة لهذا الفيديو.';
                 formatsList.appendChild(li);
             }
-
 
             resultsDiv.style.display = 'block';
         } else {

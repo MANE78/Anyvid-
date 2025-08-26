@@ -1,11 +1,15 @@
+# This is the main build configuration
 [build]
-  command = "pip install -r requirements.txt"
+  # This command installs the Node.js dependencies
+  command = "npm install"
+  # This is the directory that contains the serverless functions
   functions = "netlify/functions"
+  # This is the directory that contains the static frontend files (HTML, CSS, JS)
+  publish = "public"
 
-[build.environment]
-  PYTHON_VERSION = "3.9"
-
+# This is a redirect rule to make the API work
 [[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/server"
-  status = 200
+  # Forward any request to /api/* to the serverless function
+  from = "/api/*"
+  to = "/.netlify/functions/server/:splat"
+  status = 200 # 200 means it's a rewrite, not a redirect

@@ -1,0 +1,17 @@
+{
+  "name": "anyvid-downloader",
+  "version": "1.0.0",
+  "description": "A web app to download videos.",
+  "main": "netlify/functions/server.js",
+  "scripts": {
+    "start": "node netlify/functions/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "serverless-http": "^3.2.0",
+    "ytdl-core": "^4.11.5"
+  },
+  "author": "",
+  "license": "ISC"
+}
